@@ -171,12 +171,9 @@ def setup_package(version):
 if __name__ == '__main__':
     old_modules = sys.modules.copy()
     try:
-        from patroni import check_psycopg
         from patroni.version import __version__
     finally:
         sys.modules.clear()
         sys.modules.update(old_modules)
-
-    check_psycopg()
 
     setup_package(__version__)
