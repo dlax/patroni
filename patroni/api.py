@@ -1385,6 +1385,7 @@ class RestApiServer(ThreadingMixIn, HTTPServer, Thread):
                 cursor.execute(sql.encode('utf-8'), params)
                 return [r for r in cursor]
         except psycopg.Error as e:
+            logger.error("failed to execute %s: %s (%s)", sql, e, type(e))
             if cursor and cursor.connection.closed == 0:
                 raise e
             raise PostgresConnectionException('connection problems')
